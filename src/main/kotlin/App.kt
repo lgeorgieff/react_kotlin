@@ -1,22 +1,31 @@
 import kotlinx.css.*
 import kotlinx.html.video
-import react.RBuilder
-import react.RComponent
-import react.RProps
-import react.RState
+import react.*
 import react.dom.*
 import styled.css
 import styled.styledDiv
 
-class App : RComponent<RProps, RState>() {
+external interface AppState : RState {
+    var currentVideo: Video?
+}
+
+class App : RComponent<RProps, AppState>() {
     override fun RBuilder.render() {
         h1 { +"KotlinConf Explorer" }
         div {
             h3 { +"Videos to watch" }
-            videoList { videos = UNWATCHED_VIDEOS }
+            videoList {
+                videos = UNWATCHED_VIDEOS
+                selectedVideo = state.currentVideo
+                onSelectVideo = { video -> setState { currentVideo = video } }
+            }
 
             h3 { +"Videos watched" }
-            videoList { videos = WATCHED_VIDEOS }
+            videoList {
+                videos = WATCHED_VIDEOS
+                selectedVideo = state.currentVideo
+                onSelectVideo = { video -> setState { currentVideo = video } }
+            }
 
         }
         styledDiv {
