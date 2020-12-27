@@ -1,8 +1,5 @@
 import kotlinx.browser.document
-import kotlinx.css.*
 import react.dom.*
-import styled.css
-import styled.styledDiv
 
 val UNWATCHED_VIDEOS = listOf(
     Video(1, "Building and breaking things", "John Doe", "https://youtu.be/PsaFVLr8t4E"),
@@ -15,29 +12,6 @@ val WATCHED_VIDEOS = listOf(
 
 fun main() {
     render(document.getElementById("root")) {
-        h1 { +"KotlinConf Explorer" }
-        div {
-            h3 { +"Videos to watch" }
-            UNWATCHED_VIDEOS.forEach {video -> p { +"${video.speaker}: ${video.title}" } }
-
-            h3 { +"Videos watched" }
-            WATCHED_VIDEOS.forEach { video -> p { +"${video.speaker}: ${video.title}" } }
-
-        }
-        styledDiv {
-            css {
-                position = Position.absolute
-                top = 10.px
-                right = 10.px
-            }
-            h3 {
-                +"John Doe: Building and breaking things"
-            }
-            img {
-                attrs {
-                    src = "https://via.placeholder.com/640x360.png?text=Video+Player+Placeholder"
-                }
-            }
-        }
+        child(App::class) {}
     }
 }
